@@ -1,15 +1,12 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { StoreModule } from '@ngrx/store';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CounterButtonsComponent } from './counter/counter-buttons/counter-buttons.component';
 import { CounterOutputComponent } from './counter/counter-output/counter-output.component';
 import { CounterComponent } from './counter/counter/counter.component';
-import { MyTestComponent } from './my-test/my-test.component';
-import { counterReducer } from './reducers/tuturial.reducer';
-import { CustomerCounterInputComponent } from './counter/customer-counter-input/customer-counter-input.component';
+import { CustomCounterInputComponent } from './counter/custom-counter-input/custom-counter-input.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './shared/component/header/header.component';
@@ -23,11 +20,10 @@ import { EditPostComponent } from './posts/edit-post/edit-post.component';
 @NgModule({
   declarations: [
     AppComponent,
-    MyTestComponent,
     CounterComponent,
     CounterOutputComponent,
     CounterButtonsComponent,
-    CustomerCounterInputComponent,
+    CustomCounterInputComponent,
     HomeComponent,
     HeaderComponent,
     PostsListComponent,

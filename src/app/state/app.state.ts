@@ -1,7 +1,7 @@
-import { CounterState } from '../models/tutorial.model';
+import { counterReduser } from '../counter/state/counter.reduser';
+import { CounterState } from '../counter/state/counter.state';
 import { postsReducer } from '../posts/state/posts.reducer';
 import { PostsState } from '../posts/state/posts.state';
-import { counterReducer } from '../reducers/tuturial.reducer';
 
 export interface AppState {
   counter: CounterState;
@@ -9,6 +9,6 @@ export interface AppState {
 }
 
 export const appReducer = {
-    counter:counterReducer,
+    counter:counterReduser,
     posts:postsReducer
 }

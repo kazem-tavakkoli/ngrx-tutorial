@@ -1,5 +1,5 @@
 <div>
-    <h4>{{chanelName}}</h4>
+    <h4>{{chanelName$ |async}}</h4>
     <input type="text" placeholder="enter value" [(ngModel)]="value">
     <button (click)="onAdd()" class="btn btn-primary"> add to counter</button>
 </div>

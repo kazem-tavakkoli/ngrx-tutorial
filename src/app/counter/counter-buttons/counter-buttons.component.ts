@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Add_Tutorial, Remove_Tutorial, Reset_Tutorial } from 'src/app/actions/tutorial.actions';
 import { AppState } from 'src/app/state/app.state';
+import { decrement, increment, reset } from '../state/counter.actions';
 
 @Component({
   selector: 'app-counter-buttons',
@@ -18,14 +18,14 @@ export class CounterButtonsComponent implements OnInit {
   }
  
   increment() {
-    this.store.dispatch(Add_Tutorial());
+    this.store.dispatch(increment());
   }
  
   decrement() {
-    this.store.dispatch(Remove_Tutorial());
+    this.store.dispatch(decrement());
   }
  
   reset() {
-    this.store.dispatch(Reset_Tutorial());
+    this.store.dispatch(reset());
   }
 }
