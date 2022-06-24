@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="col-md-6 offset-md-3">
+    <h3>Login</h3>
+    <hr />
+    <form [formGroup]="loginForm" (submit)="onLoginSubmit()">
+      <div class="mb-3">
+        <label for="">Email</label>
+            <input 
+            type="text" 
+            class="form-control" 
+            formControlName="email" />
+            <div *ngIf="loginForm.get('email')?.touched && !loginForm.get('email')?.valid">
+                <div style="color: red;" *ngIf="loginForm.get('email')?.errors?.hasOwnProperty('required')">
+                    email is requaer
+                </div>
+            </div>
+      </div>
+      <div class="mb-3">
+        <label for="">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          formControlName="password"
+        />
+        <div *ngIf="loginForm.get('password')?.touched && !loginForm.get('password')?.valid">
+            <div style="color: red;" *ngIf="loginForm.get('password')?.errors?.hasOwnProperty('required')">
+                password is requaer
+            </div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <button type="submit" class="btn btn-primary" [disabled]="!loginForm.valid">Login</button>
+      </div>
+    </form>
+  </div>
+</div>
