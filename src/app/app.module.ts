@@ -30,7 +30,7 @@ import { LoadingSpinerComponent } from './shared/component/loading-spiner/loadin
     EffectsModule.forRoot([]),
     StoreModule.forRoot({}),
     StoreDevtoolsModule.instrument({
-      logOnly: environment.production, // Restrict extension to log-only mode
+    logOnly: environment.production, // Restrict extension to log-only mode
     }),
   ],
   providers: [],

@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { AuthService } from 'src/app/services/auth.service';
 import { AppState } from 'src/app/state/app.state';
 import { loginStart } from '../state/auth.actions';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.sass']
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
 

@@ -1,17 +1,14 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "cli": {
-    "analytics": "3a1d28e6-dd39-47bf-93da-93c8f615b870"
+    "analytics": "dbea1f93-1cba-414d-9b24-b5cff91b24d2"
   },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ngrx-tut": {
+    "NGRX_Tutorial": {
       "projectType": "application",
       "schematics": {
-        "@schematics/angular:component": {
-          "style": "sass"
-        },
         "@schematics/angular:application": {
           "strict": true
         }
@@ -23,19 +20,18 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ngrx-tut",
+            "outputPath": "dist/ngrx-tutorial",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
-            "inlineStyleLanguage": "sass",
             "assets": [
               "src/favicon.ico",
               "src/assets"
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "src/styles.sass"
+              "src/styles.css"
             ],
             "scripts": []
           },
@@ -76,10 +72,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "ngrx-tut:build:production"
+              "browserTarget": "NGRX_Tutorial:build:production"
             },
             "development": {
-              "browserTarget": "ngrx-tut:build:development"
+              "browserTarget": "NGRX_Tutorial:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -87,7 +83,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ngrx-tut:build"
+            "browserTarget": "NGRX_Tutorial:build"
           }
         },
         "test": {
@@ -97,14 +93,12 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
-            "inlineStyleLanguage": "sass",
             "assets": [
               "src/favicon.ico",
               "src/assets"
             ],
             "styles": [
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "src/styles.sass"
+              "src/styles.css"
             ],
             "scripts": []
           }
@@ -112,5 +106,5 @@
       }
     }
   },
-  "defaultProject": "ngrx-tut"
+  "defaultProject": "NGRX_Tutorial"
 }

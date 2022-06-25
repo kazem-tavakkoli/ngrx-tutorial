@@ -10,7 +10,7 @@ import { getPostById } from '../state/posts.selector';
 @Component({
   selector: 'app-edit-post',
   templateUrl: './edit-post.component.html',
-  styleUrls: ['./edit-post.component.sass']
+  styleUrls: ['./edit-post.component.css']
 })
 export class EditPostComponent implements OnInit {
   post!:Post;

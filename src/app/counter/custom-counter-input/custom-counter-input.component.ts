@@ -8,7 +8,7 @@ import { getchanelName } from '../state/counter.selectors';
 @Component({
   selector: 'app-custom-counter-input',
   templateUrl: './custom-counter-input.component.html',
-  styleUrls: ['./custom-counter-input.component.sass']
+  styleUrls: ['./custom-counter-input.component.css']
 })
 export class CustomCounterInputComponent implements OnInit {
   value!: number;
