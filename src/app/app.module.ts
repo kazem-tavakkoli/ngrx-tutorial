@@ -11,15 +11,15 @@ import { environment } from 'src/environments/environment';
 import { appReducer } from './state/app.state';
 import { EffectsModule } from '@ngrx/effects';
 import {HttpClientModule} from '@angular/common/http';
+import { LoadingSpinerComponent } from './shared/component/loading-spiner/loading-spiner.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-
     HomeComponent,
     HeaderComponent,
-  
+    LoadingSpinerComponent,
     ],
   imports: [
     BrowserModule,
