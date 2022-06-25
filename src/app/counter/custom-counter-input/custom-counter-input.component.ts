@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { AppState } from 'src/app/state/app.state';
+import { AppState } from 'src/app/store/app.state';
 import { Chane_Chanel_Name, customIncrement } from '../state/counter.actions';
 import { getchanelName } from '../state/counter.selectors';
 

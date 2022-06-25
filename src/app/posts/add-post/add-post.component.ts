@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { State, Store } from '@ngrx/store';
 import { Post } from 'src/app/models/posts.model';
-import { AppState } from 'src/app/state/app.state';
+import { AppState } from 'src/app/store/app.state';
 import { addPost } from '../state/posts.actions';
 
 @Component({

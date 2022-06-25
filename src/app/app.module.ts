@@ -8,10 +8,10 @@ import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './shared/component/header/header.component';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from 'src/environments/environment';
-import { appReducer } from './state/app.state';
 import { EffectsModule } from '@ngrx/effects';
 import {HttpClientModule} from '@angular/common/http';
 import { LoadingSpinerComponent } from './shared/component/loading-spiner/loading-spiner.component';
+import { appReducer } from './store/app.state';
 
 
 @NgModule({
@@ -28,7 +28,7 @@ import { LoadingSpinerComponent } from './shared/component/loading-spiner/loadin
     ReactiveFormsModule,
     HttpClientModule,
     EffectsModule.forRoot([]),
-    StoreModule.forRoot({}),
+    StoreModule.forRoot(appReducer),
     StoreDevtoolsModule.instrument({
     logOnly: environment.production, // Restrict extension to log-only mode
     }),

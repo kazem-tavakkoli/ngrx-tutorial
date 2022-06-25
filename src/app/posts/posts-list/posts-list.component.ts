@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, observable } from 'rxjs';
 import { Post } from 'src/app/models/posts.model';
-import { AppState } from 'src/app/state/app.state';
+import { AppState } from 'src/app/store/app.state';
 import { deletePost } from '../state/posts.actions';
 import { getPosts } from '../state/posts.selector';
 

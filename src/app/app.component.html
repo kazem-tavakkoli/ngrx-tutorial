@@ -1,5 +1,5 @@
 <app-header></app-header>
-<app-loading-spiner></app-loading-spiner>
+<app-loading-spiner *ngIf="showLoading$ |async"></app-loading-spiner>
 <div class="container">
     <div class="row">
         <div class="col-md-12">
