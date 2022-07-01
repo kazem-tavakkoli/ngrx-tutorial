@@ -1,0 +1,37 @@
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+      <h3>Signup</h3>
+      <hr />
+      <form [formGroup]="signupForm" (submit)="onSignupSubmit()">
+        <div class="mb-3">
+          <label for="">Email</label>
+              <input 
+              type="text" 
+              class="form-control" 
+              formControlName="email" />
+              <div *ngIf="signupForm.get('email')?.touched && !signupForm.get('email')?.valid">
+                  <div style="color: red;" *ngIf="signupForm.get('email')?.errors?.hasOwnProperty('required')">
+                      email is requaer
+                  </div>
+              </div>
+        </div>
+        <div class="mb-3">
+          <label for="">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            formControlName="password"
+          />
+          <div *ngIf="signupForm.get('password')?.touched && !signupForm.get('password')?.valid">
+              <div style="color: red;" *ngIf="signupForm.get('password')?.errors?.hasOwnProperty('required')">
+                  password is requaer
+              </div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <button type="submit" class="btn btn-primary" [disabled]="!signupForm.valid">Signup</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
