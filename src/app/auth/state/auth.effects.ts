@@ -9,7 +9,7 @@ import {
   setErrorMessasge,
   setLoadingSpinner,
 } from 'src/app/store/shared/shared.action';
-import { loginStart, loginSuccess, signupStart, signupSuccess } from './auth.actions';
+import { AUTO_LOGIN_ACTION, loginStart, loginSuccess, signupStart, signupSuccess } from './auth.actions';
 
 @Injectable()
 export class AuthEffects {
@@ -29,6 +29,7 @@ export class AuthEffects {
             this.store.dispatch(setLoadingSpinner({ status: false }));
             this.store.dispatch(setErrorMessasge({ message: '' }));
             const user = this.authService.formatUser(data);
+            this.authService.setUserInLocalsStorage(user);
             return loginSuccess({ user });
           }),
           catchError((errResp) => {
@@ -67,6 +68,7 @@ export class AuthEffects {
             this.store.dispatch(setLoadingSpinner({ status: false }));
             this.store.dispatch(setErrorMessasge({ message: '' }));
             const user = this.authService.formatUser(data);
+            this.authService.setUserInLocalsStorage(user); 
             return signupSuccess({ user });
           }),
           catchError((errResp) => {
@@ -93,6 +95,21 @@ export class AuthEffects {
       }
       )
     );
+  })
+
+  autoLogin$ = createEffect(
+    () => {
+    return this.actions$.pipe(
+      ofType(AUTO_LOGIN_ACTION),
+      map((action) => {
+        const user = this.authService.getUserFromLocalsStorage();
+        console.log(user);  
+      }
+      )
+    );
+  },
+  {
+    dispatch:false
   })
  
 }

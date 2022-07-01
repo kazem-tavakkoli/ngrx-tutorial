@@ -9,6 +9,7 @@ import { User } from '../models/user.model';
   providedIn: 'root',
 })
 export class AuthService {
+  timeOutInterval!: any;
   constructor(private http: HttpClient) {}
 
   login(email: string, password: string): Observable<AuthResponseData> {
@@ -42,12 +43,45 @@ export class AuthService {
     switch (message) {
       case 'EMAIL_NOT_FOUND':
         return 'Email not found';
-     case 'INVALID_PASSWORD':
-         return 'Invalid Password';
+      case 'INVALID_PASSWORD':
+        return 'Invalid Password';
       case 'EMAIL_EXISTS':
-          return 'Email already exists';
-     default:
-        return 'Unknown error occurred. please try again'
+        return 'Email already exists';
+      default:
+        return 'Unknown error occurred. please try again';
     }
+  }
+
+  setUserInLocalsStorage(user: User) {
+    localStorage.setItem('userData', JSON.stringify(user));
+    this.runTimeoutInterval(user);
+  }
+
+  runTimeoutInterval(user: User) {
+    const todaysDate = new Date().getTime();
+    const expirationDate = user.expireDate.getTime();
+    const timeInterval = expirationDate - todaysDate;
+
+    this.timeOutInterval = setTimeout(() => {
+      //logout functionality or get the refresh token
+      localStorage.removeItem('userData');
+    }, timeInterval);
+  }
+
+  getUserFromLocalsStorage() {
+    const userDataString = localStorage.getItem('userData');
+    if (userDataString) {
+      const userData = JSON.parse(userDataString);
+      const expirationDate = new Date(userData.expirationDate);
+      const user = new User(
+        userData.email,
+        userData.token,
+        userData.localId,
+        expirationDate
+      );
+      this.runTimeoutInterval(user);
+      return user;
+    }
+    return null;
   }
 }

@@ -38,7 +38,7 @@ declarations:[
 imports:[
     CommonModule,
     ReactiveFormsModule,
-    EffectsModule.forFeature([AuthEffects]),
+    EffectsModule.forFeature(),
     RouterModule.forChild(routers),
     StoreModule.forFeature(AUTH_STATE_NAME,authReduser)
 ]

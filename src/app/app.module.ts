@@ -12,6 +12,7 @@ import { EffectsModule } from '@ngrx/effects';
 import {HttpClientModule} from '@angular/common/http';
 import { LoadingSpinerComponent } from './shared/component/loading-spiner/loading-spiner.component';
 import { appReducer } from './store/app.state';
+import { AuthEffects } from './auth/state/auth.effects';
 
 
 @NgModule({
@@ -27,7 +28,7 @@ import { appReducer } from './store/app.state';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot([AuthEffects]),
     StoreModule.forRoot(appReducer),
     StoreDevtoolsModule.instrument({
     logOnly: environment.production, // Restrict extension to log-only mode
