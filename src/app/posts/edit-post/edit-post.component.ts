@@ -33,8 +33,8 @@ export class EditPostComponent implements OnInit {
 
 createForm(){
   this.postForm = new FormGroup({
-    title: new FormControl(this.post.title,[Validators.required,Validators.minLength(6)]),
-    description: new FormControl(this.post.description,[Validators.required,Validators.minLength(6)]),
+    title: new FormControl(this.post.title,[Validators.required,Validators.minLength(1)]),
+    description: new FormControl(this.post.description,[Validators.required,Validators.minLength(2)]),
   })
 }
 

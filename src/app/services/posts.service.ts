@@ -27,8 +27,21 @@ export class PostsService {
       );
   }
 
-  addPost(post: Post) : Observable<{name:string}>{
-    return this.http.post<{name:string}>('https://vue-completecourse.firebaseio.com/posts.json',post
+  addPost(post: Post): Observable<{ name: string }> {
+    return this.http.post<{ name: string }>(
+      'https://vue-completecourse.firebaseio.com/posts.json',
+      post
     );
+  }
+
+updatePost(post:Post) {
+  const postData = {[post.id]:{title:post.title,describtion:post.description}};
+    return this.http.patch('https://vue-completecourse.firebaseio.com/posts.json',
+    postData);
+  }
+
+
+  deletePost(id:String){
+    return this.http.delete(`https://vue-completecourse.firebaseio.com/posts.json?id=${id}`);
   }
 }
