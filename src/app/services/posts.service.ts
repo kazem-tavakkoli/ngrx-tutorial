@@ -42,6 +42,6 @@ updatePost(post:Post) {
 
 
   deletePost(id:String){
-    return this.http.delete(`https://vue-completecourse.firebaseio.com/posts.json?id=${id}`);
+    return this.http.delete(`https://vue-completecourse.firebaseio.com/posts/${id}.json`);
   }
 }
