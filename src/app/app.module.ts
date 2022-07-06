@@ -14,6 +14,8 @@ import { LoadingSpinerComponent } from './shared/component/loading-spiner/loadin
 import { appReducer } from './store/app.state';
 import { AuthEffects } from './auth/state/auth.effects';
 import { AutTokenInterceptor } from './services/AutToken.interceptor';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { CustomSerializer } from './store/router/coustom-serializer';
 
 
 @NgModule({
@@ -31,9 +33,11 @@ import { AutTokenInterceptor } from './services/AutToken.interceptor';
     HttpClientModule,
     EffectsModule.forRoot([AuthEffects]),
     StoreModule.forRoot(appReducer),
+    StoreRouterConnectingModule.forRoot({serializer: CustomSerializer}),
     StoreDevtoolsModule.instrument({
     logOnly: environment.production, // Restrict extension to log-only mode
     }),
+
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AutTokenInterceptor, multi: true}],
   bootstrap: [AppComponent]

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
 import { Post } from 'src/app/models/posts.model';
 import { AppState } from 'src/app/store/app.state';
 import { updatePost } from '../state/posts.actions';
@@ -12,29 +13,32 @@ import { getPostById } from '../state/posts.selector';
   templateUrl: './edit-post.component.html',
   styleUrls: ['./edit-post.component.css']
 })
-export class EditPostComponent implements OnInit {
+export class EditPostComponent implements OnInit,OnDestroy {
   post!:Post;
   postForm! :FormGroup;
+  postSubescription!:Subscription
+  
 
-  constructor(private route:ActivatedRoute,private store:Store<AppState>) { }
+  constructor(private store:Store<AppState>,private router:Router) { }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe((params)=>{
-      const id = params.get('id');
-      this.store.select(getPostById,{id}).subscribe(data=>{
-        this.post = data;
-        this.createForm()
-      })
+    this.createForm();
+    this.postSubescription = this.store.select(getPostById).subscribe(post => {
+      this.post = post;
+      if(post){
+        this.postForm.patchValue({
+          title: post.title,
+          description: post.description
+        })
+      }
+    });
 
-      console.log(this.post);
-      
-    })
   }
 
 createForm(){
   this.postForm = new FormGroup({
-    title: new FormControl(this.post.title,[Validators.required,Validators.minLength(1)]),
-    description: new FormControl(this.post.description,[Validators.required,Validators.minLength(2)]),
+    title: new FormControl(null,[Validators.required,Validators.minLength(1)]),
+    description: new FormControl(null,[Validators.required,Validators.minLength(2)]),
   })
 }
 
@@ -51,7 +55,16 @@ onSubmit(){
     description
   }
    this.store.dispatch(updatePost({post}));
+   this.router.navigate(['posts']);
 }
+
+ngOnDestroy(){
+  if(this.postSubescription){
+  this.postSubescription.unsubscribe();
+  }
+}
+
+
 
 
 showDescriptionErrors(){
