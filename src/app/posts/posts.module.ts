@@ -9,7 +9,7 @@ import { EditPostComponent } from './edit-post/edit-post.component';
 import { PostsListComponent } from './posts-list/posts-list.component';
 import { PostsEffect } from './state/posts.effects';
 import { postsReducer } from './state/posts.reducer';
-import { POSTS_STSTE_NAME } from './state/posts.selector';
+import { POSTS_STATE_NAME } from './state/posts.selector';
 import { SingelPostComponent } from './singel-post/singel-post.component';
 
 const routes: Routes = [
@@ -34,7 +34,7 @@ const routes: Routes = [
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
-    StoreModule.forFeature(POSTS_STSTE_NAME, postsReducer),
+    StoreModule.forFeature(POSTS_STATE_NAME, postsReducer),
     RouterModule.forChild(routes),
     EffectsModule.forFeature([PostsEffect]),
   ],

@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Update } from '@ngrx/entity';
 import { RouterNavigatedAction, ROUTER_NAVIGATION } from '@ngrx/router-store';
 import { Store } from '@ngrx/store';
 import { exhaustMap, filter, map, mergeMap, switchMap } from 'rxjs';
+import { Post } from 'src/app/models/posts.model';
 import { PostsService } from 'src/app/services/posts.service';
 import { AppState } from 'src/app/store/app.state';
 import { setLoadingSpinner } from 'src/app/store/shared/shared.action';
@@ -60,7 +62,13 @@ export class PostsEffect {
         return this.postsService.updatePost(action.post).pipe(
           map((data) => {
             this.store.dispatch(setLoadingSpinner({ status: false }));
-            return updatePostSuccess({ post: action.post });
+            const updatePost:Update<Post> ={
+              id:action.post.id,
+              changes:{
+                ...action.post
+              }
+            }
+            return updatePostSuccess({ post: updatePost });
           })
         );
       })
