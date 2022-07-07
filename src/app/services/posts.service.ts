@@ -44,4 +44,8 @@ updatePost(post:Post) {
   deletePost(id:String){
     return this.http.delete(`https://vue-completecourse.firebaseio.com/posts/${id}.json`);
   }
+
+  getPostById(id:String):Observable<Post>{
+    return this.http.get<Post>(`https://vue-completecourse.firebaseio.com/posts/${id}.json`);
+  }
 }

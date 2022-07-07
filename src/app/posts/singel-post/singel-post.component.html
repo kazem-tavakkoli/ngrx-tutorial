@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-header">Post Detail</h3>
+          <div *ngIf="postItem$ | async as post">
+            <p class="card-text">Id: {{ post.id }}</p>
+            <p class="card-text">Title :{{ post.title }}</p>
+            <p class="card-text">Description :{{ post.description }}</p>
+          </div>
+          <div>
+            <a  [routerLink]="['/posts']">Back to posts</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
