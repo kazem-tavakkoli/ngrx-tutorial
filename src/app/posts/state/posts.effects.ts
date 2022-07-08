@@ -3,7 +3,8 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Update } from '@ngrx/entity';
 import { RouterNavigatedAction, ROUTER_NAVIGATION } from '@ngrx/router-store';
 import { Store } from '@ngrx/store';
-import { exhaustMap, filter, map, mergeMap, switchMap } from 'rxjs';
+import { exhaustMap, filter, map, mergeMap, of, switchMap, withLatestFrom } from 'rxjs';
+import { dummyAction } from 'src/app/auth/state/auth.actions';
 import { Post } from 'src/app/models/posts.model';
 import { PostsService } from 'src/app/services/posts.service';
 import { AppState } from 'src/app/store/app.state';
@@ -18,6 +19,7 @@ import {
   updatePost,
   updatePostSuccess,
 } from './posts.actions';
+import { getPosts } from './posts.selector';
 
 @Injectable()
 export class PostsEffect {
@@ -29,13 +31,18 @@ export class PostsEffect {
   loadposts$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(loadPosts),
-      mergeMap((action) => {
-        return this.postsService.getPosts().pipe(
-          map((posts) => {
-            this.store.dispatch(setLoadingSpinner({ status: false }));
-            return loadPostsSuccess({ posts });
-          })
-        );
+      withLatestFrom(this.store.select(getPosts)), // اگر لیست از قبل وجود داشت به سرور درخواست مجدد ارسال نشود
+      mergeMap(([action,posts]) => {      // mergeMap((action) => {  اگر قرار نبود لیست چک شود و درخواست حتما باید به سرور ارسال میشد
+        if(!posts.length ||posts.length === 1) {
+          return this.postsService.getPosts().pipe(
+            map((posts) => {
+              this.store.dispatch(setLoadingSpinner({ status: false }));
+              return loadPostsSuccess({ posts });
+            })
+          );
+        }
+        return of(dummyAction()); // چون حتما باید یه اکشن برگشت داده شود یه اکشن الکی ساختیم که هیچ کارایی ندارد تا از خطا جلوگیری شود
+       
       })
     );
   });
@@ -98,13 +105,17 @@ export class PostsEffect {
       map((r: any) => {
         return r.payload.routerState['params']['id'];
       }),
-      switchMap((id: string) => {
-        return this.postsService.getPostById(id).pipe(
-          map((post) => {
-            const postData = [{ ...post, id: id }];
-            return loadPostsSuccess({ posts: postData });
-          })
-        );
+      withLatestFrom(this.store.select(getPosts)),//برای اینکه چک کند اگر این آیتم در استیت وجود داشت به سرور درخواست ارسال نکند
+      switchMap(([id,posts]) => {  //switchMap((id)=> {  اگر قرار نبود لیست چک شود و درخواست حتما باید به سرور ارسال میشد
+        if(!posts.length){
+          return this.postsService.getPostById(id).pipe(
+            map((post) => {
+              const postData = [{ ...post, id: id }];
+              return loadPostsSuccess({ posts: postData });
+            })
+          );
+        }
+        return of(dummyAction()) // چون حتما باید یه اکشن برگشت داده شود یه اکشن الکی ساختیم که هیچ کارایی ندارد تا از خطا جلوگیری شود
       })
     );
   });
