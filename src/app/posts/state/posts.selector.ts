@@ -18,6 +18,8 @@ export const getPostById = createSelector(
   }
 );
 
+export const getCount = createSelector(getPostsState, (state: PostsState) => state.count);
+
 
 
 

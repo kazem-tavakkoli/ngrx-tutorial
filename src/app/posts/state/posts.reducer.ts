@@ -10,7 +10,13 @@ import { initialState, postsAdapter } from './posts.state';
 const _postReduser = createReducer(
   initialState,
   on(addPostSuccsess, (state: any, action: any) => {
-    return postsAdapter.addOne(action.post, state);
+    // return postsAdapter.addOne(action.post, state); برای حالت معمولی
+
+     //    برای حالتی که هنگام افزودن پست جدید به لیست پست ها به صورت خودکار اضافه میشود شمارنده یک عدد اضافه شود
+    return postsAdapter.addOne(action.post, {
+      ...state,
+      count: state.count + 1, //این مورد در post.state.ts اضافه شد
+    });
   }),
   on(updatePostSuccess, (state: any, action: any) => {
     return postsAdapter.updateOne(action.post, state);
